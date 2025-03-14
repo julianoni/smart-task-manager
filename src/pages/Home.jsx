@@ -3,6 +3,7 @@ import { addTask, removeTask } from "../store/taskSlice";
 import Header from "../components/Header";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
+import PriorityAI from "../components/PriorityAI";
 
 const Home = () => {
     const tasks = useSelector((state) => state.tasks.tasks);
@@ -14,6 +15,7 @@ const Home = () => {
             <div className="max-w-lg mx-auto p-4">
                 <TaskForm addTask={(task) => dispatch(addTask(task))} />
                 <TaskList tasks={tasks} removeTask={(index) => dispatch(removeTask(index))} />
+                <PriorityAI />
             </div>
         </div>
     );

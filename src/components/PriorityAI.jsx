@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 
 const PriorityAI = () => {
@@ -7,14 +7,12 @@ const PriorityAI = () => {
     const [priority, setPriority] = useState("");
 
     const getPriority = async () => {
-        const response = await axios.post("https://api.openai.com/v1/chat/completions", {
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: `Here are my tasks: ${tasks.join(", ")}. Which ones should I prioritize?` }],
-        }, {
-            headers: { "Authorization": `Bearer YOUR_OPENAI_API_KEY` }
-        });
-
-        setPriority(response.data.choices[0].message.content);
+        try {
+            const response = await axios.post("https://your-backend-url.com/api/priority", { tasks });
+            setPriority(response.data.priority);
+        } catch (error) {
+            console.error("Error fetching priority:", error);
+        }
     };
 
     return (
@@ -26,3 +24,4 @@ const PriorityAI = () => {
 };
 
 export default PriorityAI;
+
